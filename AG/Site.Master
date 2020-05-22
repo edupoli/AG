@@ -4,69 +4,390 @@
 
 <html lang="en">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Meu aplicativo ASP.NET</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>AG</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
+    <style>
+        label {
+            font-weight: normal !important;
+        }
+    </style>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        
+    <!-- Font Awesome -->
+      <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css"/>
+      <!-- Animate -->
+      <link href="../../plugins/animate/animate.css" rel="stylesheet" />
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="dist/css/ionicons.min.css"/>
+      <!-- overlayScrollbars -->
+      <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+      <!-- DataTables -->
+      <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"/>
+      <!-- jsGrid -->
+      <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+      <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+      <!-- SweetAlert2 -->
+      <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"/>
+      <!-- Toastr -->
+      <link rel="stylesheet" href="../../plugins/toastr/toastr1.css"/>
+      <!-- daterange picker -->
+      <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css"/>
+      <!-- iCheck for checkboxes and radio inputs -->
+      <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+      <!-- Bootstrap Color Picker -->
+      <link rel="stylesheet" href="../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css"/>
+      <!-- Tempusdominus Bbootstrap 4 -->
+      <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"/>
+      <!-- Select2 -->
+      <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css"/>
+      <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"/>
+      <!-- Bootstrap4 Duallistbox -->
+      <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css" />
+      <!-- Theme style -->
+      <link rel="stylesheet" href="../../dist/css/adminlte.min.css"/>
+      <!-- Google Font: Source Sans Pro -->
+      <link href="dist/css/css.css" rel="stylesheet"/>
+    <style>
+        .scrollable-menu {
+    height: auto;
+    max-height: 600px;
+    overflow-x: hidden;
+}
+    </style>
 
 </head>
-<body>
-    <form runat="server">
-        <asp:ScriptManager runat="server">
-            <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="bootstrap" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
-            </Scripts>
-        </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Nome do aplicativo</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Página inicial</a></li>
-                        <li><a runat="server" href="~/About">Sobre</a></li>
-                        <li><a runat="server" href="~/Contact">Contato</a></li>
+    
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse layout-navbar-fixed layout-footer-fixed text-sm">
+    <form id="form1" runat="server">
+                <div class="wrapper">
+              <!-- Navbar -->
+              <nav class="main-header navbar navbar-expand navbar-white navbar-light  text-sm">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                  </li>
+
+                </ul>
+
+                    <span class="d-none d-md-inline text-muted">
+                        <i class="far fa-clock"></i>
+                        Sessão expira em <span id="time">10:00</span> minutos de Inatividade!
+                            </span>
+
+                  <style>
+                        a:hover {
+                        background-color: #007bff !important; 
+                        font-weight:bold !important; 
+                        color: #ffffff !important; 
+                    }
+                  </style>
+
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item dropdown user-menu">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <asp:Image runat="server" ID="imgUser1" CssClass="user-image img-circle elevation-2" alt="User Image"/>
+                      <span class="d-none d-md-inline">
+                          <asp:Label  runat="server" ID="lblNome" />
+                      </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                      <!-- User image -->
+                      <li class="user-header bg-primary">
+                          <asp:Image  runat="server" ID="imgUser" CssClass="img-circle elevation-2" alt="User Image" />
+                        <p>
+                            <asp:Label  runat="server" ID="lblCargo" />
+                          <small>Membro desde Maio 2020</small>
+                        </p>
+                      </li>
+                      <!-- Menu Body -->
+                      <li class="user-body">
+                        <div class="row">
+                          <div class="col-4 text-center">
+                            <a href="#"></a>
+                          </div>
+                          <div class="col-4 text-center">
+                            <a href="#"></a>
+                          </div>
+                          <div class="col-4 text-center">
+                            <a href="#"></a>
+                          </div>
+                        </div>
+                        <!-- /.row -->
+                      </li>
+                      <!-- Menu Footer-->
+                      <li class="user-footer">
+                          <asp:Button Text="Profile" runat="server" ID="btnProfile" CssClass="btn btn-outline-primary" OnClick="btnProfile_Click" />
+                          <asp:Button Text="Logout" runat="server" ID="btnLogout" CssClass="btn btn-outline-primary float-right" OnClick="btnLogout_Click"/>
+                      </li>
                     </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Meu aplicativo ASP.NET</p>
-            </footer>
-        </div>
+                  </li>
+                    
+                  <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+                        class="fas fa-th-large"></i></a>
+                  </li>
+                </ul>
 
+
+
+              </nav>
+              <!-- /.navbar -->
+
+
+
+              <!-- Main Sidebar Container -->
+              <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="home.aspx" class="brand-link">
+              <img src="dist/img/logo.png" alt="Tafifador" class="brand-image img-circle elevation-3"
+                   style="opacity: .8">
+              <span class="brand-text font-weight-normal">Consultar AG</span>
+            </a>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                  <!-- Sidebar user panel (optional) -->
+
+
+                  <!-- Sidebar Menu -->
+                  <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar text-sm  flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                      <!-- Add icons to the links using the .nav-icon class
+                           with font-awesome or any other icon font library -->
+                      <li class="nav-item has-treeview menu-open">
+                        <a href="./home.aspx" class="nav-link active">
+                          <i class="nav-icon fas fa-tachometer-alt"></i>
+                          <p>
+                            Dashboard
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="./home.aspx" class="nav-link active">
+                              <i class="nav-icon fas fa-home nav-icon"></i>
+                              <p>Home</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-user"></i>
+                          <p>
+                            Usuários
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Usuarios.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                              <asp:LinkButton  runat="server" ID="linkUsuario" CssClass="nav-link" OnClick="linkUsuario_Click" >
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </asp:LinkButton>
+                          </li>
+                        </ul>
+                      </li>
+                        <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-project-diagram"></i>
+                          <p>
+                              Projetos
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Projetos.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                              <asp:LinkButton runat="server" ID="linkGrupoUsuario" CssClass="nav-link" OnClick="linkGrupoUsuario_Click" >
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </asp:LinkButton>
+                          </li>
+                        </ul>
+                      </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-address-card"></i>
+                          <p>
+                            AGs
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="AGs.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                              <asp:LinkButton  runat="server" ID="cadastrarAG" CssClass="nav-link" OnClick="cadastrarAG_Click" >
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </asp:LinkButton>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
+                  <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+              </aside>
+
+              <!-- Control Sidebar -->
+              <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+              </aside>
+              <!-- /.control-sidebar -->
+
+              <!-- Main Footer -->
+              <footer class="main-footer text-sm">
+                <strong>Copyright &copy; 2020 Sercomtel Contact Center.</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                  <b>Versão</b> 1.0
+                </div>
+              </footer>
+            </div>
+            <!-- ./wrapper -->
+
+            <!-- REQUIRED SCRIPTS -->
+            <!-- jQuery -->
+            <script src="../../plugins/jquery/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- jquery-validation -->
+            <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+            <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
+            <!-- Select2 -->
+            <script src="../../plugins/select2/js/select2.full.min.js"></script>
+            <!-- Bootstrap4 Duallistbox -->
+            <script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+            <!-- InputMask -->
+            <script src="../../plugins/moment/moment.min.js"></script>
+            <script src="../../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+            <!-- date-range-picker -->
+            <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+            <!-- bootstrap color picker -->
+            <script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+            <!-- Tempusdominus Bootstrap 4 -->
+            <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+            <!-- Bootstrap Switch -->
+            <script src="../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+            <!-- overlayScrollbars -->
+            <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+            <!-- DataTables -->
+            <script src="../../plugins/datatables/jquery.dataTables.js"></script>
+            <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+            <!-- ChartJS -->
+            <script src="../../plugins/chart.js/Chart.min.js"></script>
+            <!-- jsGrid -->
+            <script src="../../plugins/jsgrid/demos/db.js"></script>
+            <script src="../../plugins/jsgrid/jsgrid.min.js"></script>
+            <!-- SweetAlert2 -->
+            <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+            <!-- bs-custom-file-input -->
+            <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+            <!-- Toastr -->
+            <script src="../../plugins/toastr/toastr.js"></script>
+            <!-- AdminLTE App -->
+            <script src="../../dist/js/adminlte.min.js"></script>
+            <script src="../../dist/js/adminlte.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="../../dist/js/demo.js"></script>
+
+
+
+            <!-- PAGE PLUGINS -->
+            <!-- jQuery Mapael -->
+            <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+            <script src="plugins/raphael/raphael.min.js"></script>
+            <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+            <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+            <!-- ChartJS -->
+            <script src="plugins/chart.js/Chart.min.js"></script>
+
+            <!-- PAGE SCRIPTS -->
+            <script src="dist/js/pages/dashboard2.js"></script>
+
+        <script type="text/javascript">
+        function acessoNegado() {
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["info"]("Acesso somente a usuarios Administradores. ", "Erro")
+      };
+    </script>
+        <script type="text/javascript">
+            function startTimer(duration, display) {
+                var timer = duration, minutes, seconds;
+                setInterval(function () {
+                    minutes = parseInt(timer / 60, 10)
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    display.textContent = minutes + ":" + seconds;
+
+                    if (--timer < 0) {
+                        timer = duration;
+                    }
+                }, 1000);
+            }
+
+            window.onload = function () {
+                var fiveMinutes = 60 * 10,
+                    display = document.querySelector('#time');
+                startTimer(fiveMinutes, display);
+            };
+        </script>
+    
+    <div>
+        <asp:ContentPlaceHolder id="body" runat="server">
+
+        </asp:ContentPlaceHolder>
+    </div>
     </form>
 </body>
+
 </html>
