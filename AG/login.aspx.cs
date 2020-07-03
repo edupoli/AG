@@ -16,6 +16,8 @@ namespace AG
         string password;
         public string mensagem = string.Empty;
         int logado = 0;
+
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             user = usuario.Text.Trim();
@@ -46,21 +48,23 @@ namespace AG
 
                     if (dt.Rows.Count != 0)
                     {
+                        Session.Count.ToString();
                         Session.Timeout = 10;
                         Session["logado"] = "SIM";
                         Session["nome"] = dt.Rows[0][1].ToString();
                         Session["perfil"] = dt.Rows[0][5].ToString();
-                        Session["img"] = dt.Rows[0][7].ToString();
-                        Session["cargo"] = dt.Rows[0][8].ToString();
+                        Session["img"] = dt.Rows[0][6].ToString();
+                        Session["cargo"] = dt.Rows[0][7].ToString();
                         Session["id"] = dt.Rows[0][0].ToString();
-                        Session["projetoID"] = dt.Rows[0][6].ToString();
-                        int projetoID = Convert.ToInt32(dt.Rows[0][6].ToString());
+                        Session["projetoID"] = dt.Rows[0][8].ToString();
+                        int projetoID = Convert.ToInt32(dt.Rows[0][8].ToString());
                         dt.Dispose();
                         logado = 1;
+                        Session.Count.ToString();
 
                         agEntities ctx = new agEntities();
                         projeto pr = ctx.projetoes.First(p => p.id == projetoID);
-                        Session["projeto"] = pr.nome;
+                        Session["projetoNome"] = pr.nome;
 
                     }
                     else

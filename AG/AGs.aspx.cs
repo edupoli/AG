@@ -10,6 +10,7 @@ namespace AG
     public partial class AGs : System.Web.UI.Page
     {
         int agID;
+        public string mensagem = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -21,29 +22,25 @@ namespace AG
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() == "Operador")
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            else
+            if (Session["perfil"].ToString() == "Administrador")
             {
-                try
-                {
-                    agID = Convert.ToInt32((sender as LinkButton).CommandArgument);
-                    Response.Redirect("EditAG.aspx?agID=" + agID);
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                agID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditAG.aspx?agID=" + agID);
             }
-
+            if (Session["perfil"].ToString() == "Supervisor")
+            {
+                agID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditAGsupervisor.aspx?agID=" + agID);
+            }
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() != "Administrador")
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
@@ -59,8 +56,9 @@ namespace AG
                     getAGs();
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    mensagem = "Não é possível deletar esse registro, pois esta sendo utilizado no cadastro de um ou mais Itens. " + ex.Message;
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
                     //throw;
                 }

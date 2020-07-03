@@ -82,25 +82,7 @@ namespace AG {
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect cboxProjeto;
-        
-        /// <summary>
-        /// Controle ASPxDropDownEdit1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxDropDownEdit ASPxDropDownEdit1;
-        
-        /// <summary>
-        /// Controle cboxProjeto1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cboxProjeto1;
+        protected global::System.Web.UI.WebControls.DropDownList cboxProjeto;
         
         /// <summary>
         /// Controle SqlDataSource1.

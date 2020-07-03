@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditUsuarios.aspx.cs" Inherits="AG.EditUsuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditUsuariosSup.aspx.cs" Inherits="AG.EditUsuariosSup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="body" runat="server">
     <div class="wrapper">
   <div class="content-wrapper">
@@ -41,26 +41,26 @@
                   <div class="col">
                     <div class="form-group">
                       <label>Nome</label>
-                        <asp:TextBox runat="server" ID="nome" CssClass="form-control"  />
+                        <asp:TextBox runat="server" ID="nome" CssClass="form-control" ReadOnly="true"  />
                     </div>
                   </div>
                 <!-- /.form-group -->
                 <div class="col">
                     <div class="form-group">
                       <label>E-Mail</label>
-                        <asp:TextBox runat="server" ID="email" CssClass="form-control"  />
+                        <asp:TextBox runat="server" ID="email" CssClass="form-control" ReadOnly="true" />
                     </div>
                 </div>
                <div class="col">
                     <div class="form-group">
                       <label>Login</label>
-                        <asp:TextBox runat="server" ID="login" CssClass="form-control"  />
+                        <asp:TextBox runat="server" ID="login" CssClass="form-control" ReadOnly="true"  />
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                       <label>Senha</label>
-                        <asp:TextBox runat="server" ID="senha" CssClass="form-control" type="password" />
+                        <asp:TextBox runat="server" ID="senha" CssClass="form-control" type="password" ReadOnly="true" />
                     </div>
                 </div>
                 <!-- /.form-group -->
@@ -69,7 +69,7 @@
                 <div class="col">
                 <div class="form-group">
                   <label>Perfil</label>
-                    <asp:DropDownList runat="server" ID="cboxPerfil" CssClass="form-control">
+                    <asp:DropDownList runat="server" ID="cboxPerfil" CssClass="form-control" Enabled="false">
                         <asp:ListItem Text="Operador"  Value="Operador"/>
                         <asp:ListItem Text="Administrador" Value="Administrador" />
                         <asp:ListItem Text="Supervisor" Value="Supervisor" />
@@ -88,7 +88,7 @@
                   <div class="col">
                     <div class="form-group">
                       <label>Cargo</label>
-                        <asp:TextBox runat="server" ID="cargo" CssClass="form-control"   />
+                        <asp:TextBox runat="server" ID="cargo" CssClass="form-control" ReadOnly="true"  />
                     </div>
                 </div>
             </div>
@@ -96,9 +96,9 @@
                     <div class="form-group">
                         <asp:Label Text="" runat="server" ID="lblCaminhoImg" />
                         <asp:Image runat="server" ID="imgSel" Width="160px" Height="160px" />
-                        <asp:FileUpload runat="server" ID="img" ToolTip="Selecione uma Imagem" CssClass="btn btn-secondary" /><br />
+                        <asp:FileUpload runat="server" ID="img" ToolTip="Selecione uma Imagem" CssClass="btn btn-secondary" Enabled="false"/><br />
                         <br />
-                        <asp:Button runat="server" ID="btnUpload" type="submit" Text="Upload" class="btn btn-primary" OnClick="btnUpload_Click" />
+                        <asp:Button runat="server" ID="btnUpload" type="submit" Text="Upload" class="btn btn-primary" OnClick="btnUpload_Click" Enabled="false" />
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@
               "showMethod": "fadeIn",
               "hideMethod": "fadeOut"
             }
-            toastr["error"]("<%= mensagem %> ", "Erro").css({
+            toastr["error"]("<%=mensagem%> ", "Erro").css({
             width: "1200px",
             "max-width": "1200px"
         })

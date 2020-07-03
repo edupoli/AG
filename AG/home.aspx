@@ -43,6 +43,7 @@
                           <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" emptydatatext="Não existem AGs disponíveis!!" class="table table-bordered table-hover">
                           <Columns>
                             <asp:BoundField DataField="numero" HeaderText="Numero" ControlStyle-Font-Bold="true" />
+                            <asp:BoundField DataField="nome" HeaderText="Projeto" ControlStyle-Font-Bold="true" />
                          </Columns>
                         </asp:GridView>
                     </ContentTemplate>
@@ -69,6 +70,7 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
   </script>   
+    <!--
     <script>
             $(document).ready(function () {
             $('#<%= GridView1.ClientID%>').prepend($("<thead></thead>").append($("#<%= GridView1.ClientID%>").find("tr:first"))).DataTable({
@@ -95,6 +97,7 @@
             }) 
             });
     </script>
+    -->
     <style>
         th{text-align:center;}
         td{text-align:center;}

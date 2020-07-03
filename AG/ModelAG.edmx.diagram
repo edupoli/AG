@@ -4,12 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3168d54f2c96402bb2a372e5100dd2e3" Name="Diagram1">
-        <EntityTypeShape EntityType="agModel.usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="agModel.projeto" Width="1.5" PointX="0.75" PointY="5.875" />
-        <AssociationConnector Association="agModel.grupoID1" />
-        <EntityTypeShape EntityType="agModel.ag" Width="1.5" PointX="3" PointY="5.875" />
-        <AssociationConnector Association="agModel.projetoID" />
+      <Diagram DiagramId="ed5a6aca00394bba8048615c7344a023" Name="Diagram1">
+        <EntityTypeShape EntityType="agModel.ag" Width="1.5" PointX="2.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="agModel.projeto" Width="1.5" PointX="0.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="agModel.usuario" Width="1.5" PointX="1.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="agModel.usuario_has_projeto" Width="1.5" PointX="5.125" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="agModel.projetoIDag" ManuallyRouted="false" />
+        <AssociationConnector Association="agModel.fk_usuario_has_projeto_projeto1" ManuallyRouted="false" />
+        <AssociationConnector Association="agModel.fk_usuario_has_projeto_usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="agModel.projeto1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

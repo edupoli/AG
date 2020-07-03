@@ -14,7 +14,7 @@ namespace AG
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            nomeProjeto = Session["projeto"].ToString();
+            nomeProjeto = Session["projetoNome"].ToString();
 
             Timer1.Enabled = true;
             Timer1.Interval = 10000;
@@ -49,9 +49,23 @@ namespace AG
                 }
 
                 string projetoID = Session["projetoID"].ToString();
+                string userID = Session["id"].ToString();
                 DataTable dtTemp = new DataTable();
                 MySqlDataAdapter daTemp = new MySqlDataAdapter();
-                string sqlTemp = "select disponiveis.numero from disponiveis inner join ag on disponiveis.numero = ag.numero and ag.projetoID = " + projetoID;
+                /* string sqlTemp = "select disponiveis.numero, projeto.nome from disponiveis" +
+                     " inner join ag.ag on disponiveis.numero = ag.numero" +
+                     " inner join usuario_has_projeto on ag.projetoID = usuario_has_projeto.projeto_id" +
+                     " inner join usuario on usuario.id = usuario_has_projeto.usuario_id" +
+                     " inner join projeto on projeto.id = usuario_has_projeto.projeto_id" +
+                     " where usuario.id = " + userID; */
+                //string sqlTemp = "select disponiveis.numero from disponiveis inner join ag on disponiveis.numero = ag.numero and ag.projetoID = " + projetoID;
+                string sqlTemp = "SELECT D.numero, P.nome " +
+                                 "FROM disponiveis D " +
+                                 "JOIN ag M " +
+                                   "ON D.numero = M.numero " +
+                                 "JOIN projeto P " +
+                                   "ON M.projetoID = P.id " +
+                                 "WHERE P.id = " + projetoID + " order by D.numero asc";
                 MySqlCommand cmdTemp = new MySqlCommand(sqlTemp, conLocal);
                 daTemp.SelectCommand = cmdTemp;
                 daTemp.Fill(dtTemp);
@@ -97,9 +111,23 @@ namespace AG
             }
 
             string projetoID = Session["projetoID"].ToString();
+            string userID = Session["id"].ToString();
             DataTable dtTemp = new DataTable();
             MySqlDataAdapter daTemp = new MySqlDataAdapter();
-            string sqlTemp = "select disponiveis.numero from disponiveis inner join ag on disponiveis.numero = ag.numero and ag.projetoID = " + projetoID;
+            /* string sqlTemp = "select disponiveis.numero, projeto.nome from disponiveis" +
+                 " inner join ag.ag on disponiveis.numero = ag.numero" +
+                 " inner join usuario_has_projeto on ag.projetoID = usuario_has_projeto.projeto_id" +
+                 " inner join usuario on usuario.id = usuario_has_projeto.usuario_id" +
+                 " inner join projeto on projeto.id = usuario_has_projeto.projeto_id" +
+                 " where usuario.id = " + userID; */
+            //string sqlTemp = "select disponiveis.numero from disponiveis inner join ag on disponiveis.numero = ag.numero and ag.projetoID = " + projetoID;
+            string sqlTemp = "SELECT D.numero, P.nome " +
+                                 "FROM disponiveis D " +
+                                 "JOIN ag M " +
+                                   "ON D.numero = M.numero " +
+                                 "JOIN projeto P " +
+                                   "ON M.projetoID = P.id " +
+                                 "WHERE P.id = " + projetoID + " order by D.numero asc";
             MySqlCommand cmdTemp = new MySqlCommand(sqlTemp, conLocal);
             daTemp.SelectCommand = cmdTemp;
             daTemp.Fill(dtTemp);

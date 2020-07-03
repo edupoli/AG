@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="numero" Type="varchar" MaxLength="45" />
           <Property Name="projetoID" Type="int" />
         </EntityType>
@@ -30,12 +30,45 @@
           <Property Name="login" Type="varchar" MaxLength="255" />
           <Property Name="senha" Type="varchar" MaxLength="255" />
           <Property Name="perfil" Type="varchar" MaxLength="255" />
-          <Property Name="projetoID" Type="int" Nullable="false" />
           <Property Name="img" Type="varchar" MaxLength="255" />
           <Property Name="cargo" Type="varchar" MaxLength="255" />
+          <Property Name="projetoID" Type="int" />
         </EntityType>
-        <Association Name="grupoID">
+        <EntityType Name="usuario_has_projeto">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="projeto_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="projeto_id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" />
+        </EntityType>
+        <Association Name="fk_usuario_has_projeto_projeto1">
           <End Role="projeto" Type="Self.projeto" Multiplicity="1" />
+          <End Role="usuario_has_projeto" Type="Self.usuario_has_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_has_projeto">
+              <PropertyRef Name="projeto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_has_projeto_usuario1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_has_projeto" Type="Self.usuario_has_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_has_projeto">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="projeto1">
+          <End Role="projeto" Type="Self.projeto" Multiplicity="0..1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="projeto">
@@ -46,7 +79,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="projetoID">
+        <Association Name="projetoIDag">
           <End Role="projeto" Type="Self.projeto" Multiplicity="0..1" />
           <End Role="ag" Type="Self.ag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -62,11 +95,20 @@
           <EntitySet Name="ag" EntityType="Self.ag" Schema="ag" store:Type="Tables" />
           <EntitySet Name="projeto" EntityType="Self.projeto" Schema="ag" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="ag" store:Type="Tables" />
-          <AssociationSet Name="grupoID" Association="Self.grupoID">
+          <EntitySet Name="usuario_has_projeto" EntityType="Self.usuario_has_projeto" Schema="ag" store:Type="Tables" />
+          <AssociationSet Name="fk_usuario_has_projeto_projeto1" Association="Self.fk_usuario_has_projeto_projeto1">
+            <End Role="projeto" EntitySet="projeto" />
+            <End Role="usuario_has_projeto" EntitySet="usuario_has_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_has_projeto_usuario1" Association="Self.fk_usuario_has_projeto_usuario1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_has_projeto" EntitySet="usuario_has_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="projeto1" Association="Self.projeto1">
             <End Role="projeto" EntitySet="projeto" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
-          <AssociationSet Name="projetoID" Association="Self.projetoID">
+          <AssociationSet Name="projetoIDag" Association="Self.projetoIDag">
             <End Role="projeto" EntitySet="projeto" />
             <End Role="ag" EntitySet="ag" />
           </AssociationSet>
@@ -75,6 +117,25 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="agModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="projetoID" Type="Int32" />
+          <NavigationProperty Name="projeto" Relationship="Self.projetoIDag" FromRole="ag" ToRole="projeto" />
+        </EntityType>
+        <EntityType Name="projeto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ags" Relationship="Self.projetoIDag" FromRole="projeto" ToRole="ag" />
+          <NavigationProperty Name="usuario_has_projeto" Relationship="Self.fk_usuario_has_projeto_projeto1" FromRole="projeto" ToRole="usuario_has_projeto" />
+          <NavigationProperty Name="usuarios" Relationship="agModel.projeto1" FromRole="projeto" ToRole="usuario" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id" />
@@ -87,33 +148,81 @@
           <Property Name="perfil" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="cargo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="projetoID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="projeto" Relationship="agModel.grupoID1" FromRole="usuario" ToRole="projeto" />
+          <NavigationProperty Name="usuario_has_projeto" Relationship="Self.fk_usuario_has_projeto_usuario1" FromRole="usuario" ToRole="usuario_has_projeto" />
+          <Property Name="projetoID" Type="Int32" />
+          <NavigationProperty Name="projeto" Relationship="agModel.projeto1" FromRole="usuario" ToRole="projeto" />
         </EntityType>
+        <EntityType Name="usuario_has_projeto">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="projeto_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="projeto_id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" />
+          <NavigationProperty Name="projeto" Relationship="Self.fk_usuario_has_projeto_projeto1" FromRole="usuario_has_projeto" ToRole="projeto" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_usuario_has_projeto_usuario1" FromRole="usuario_has_projeto" ToRole="usuario" />
+        </EntityType>
+        <Association Name="projetoIDag">
+          <End Role="projeto" Type="Self.projeto" Multiplicity="0..1" />
+          <End Role="ag" Type="Self.ag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ag">
+              <PropertyRef Name="projetoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_has_projeto_projeto1">
+          <End Role="projeto" Type="Self.projeto" Multiplicity="1" />
+          <End Role="usuario_has_projeto" Type="Self.usuario_has_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_has_projeto">
+              <PropertyRef Name="projeto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_has_projeto_usuario1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_has_projeto" Type="Self.usuario_has_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_has_projeto">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="agEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ags" EntityType="Self.ag" />
+          <EntitySet Name="projetoes" EntityType="Self.projeto" />
           <EntitySet Name="usuarios" EntityType="Self.usuario" />
-          <EntitySet Name="projetoes" EntityType="agModel.projeto" />
-          <AssociationSet Name="grupoID1" Association="agModel.grupoID1">
-            <End Role="projeto" EntitySet="projetoes" />
-            <End Role="usuario" EntitySet="usuarios" />
-          </AssociationSet>
-          <EntitySet Name="ags" EntityType="agModel.ag" />
-          <AssociationSet Name="projetoID" Association="agModel.projetoID">
+          <EntitySet Name="usuario_has_projeto" EntityType="Self.usuario_has_projeto" />
+          <AssociationSet Name="projetoIDag" Association="Self.projetoIDag">
             <End Role="projeto" EntitySet="projetoes" />
             <End Role="ag" EntitySet="ags" />
           </AssociationSet>
+          <AssociationSet Name="fk_usuario_has_projeto_projeto1" Association="Self.fk_usuario_has_projeto_projeto1">
+            <End Role="projeto" EntitySet="projetoes" />
+            <End Role="usuario_has_projeto" EntitySet="usuario_has_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_has_projeto_usuario1" Association="Self.fk_usuario_has_projeto_usuario1">
+            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="usuario_has_projeto" EntitySet="usuario_has_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="projeto1" Association="agModel.projeto1">
+            <End Role="projeto" EntitySet="projetoes" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="projeto">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuarios" Relationship="agModel.grupoID1" FromRole="projeto" ToRole="usuario" />
-          <NavigationProperty Name="ags" Relationship="agModel.projetoID" FromRole="projeto" ToRole="ag" />
-        </EntityType>
-        <Association Name="grupoID1">
-          <End Type="agModel.projeto" Role="projeto" Multiplicity="1" />
+        <Association Name="projeto1">
+          <End Type="agModel.projeto" Role="projeto" Multiplicity="0..1" />
           <End Type="agModel.usuario" Role="usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="projeto">
@@ -124,33 +233,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ag">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="numero" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="projetoID" Type="Int32" />
-          <NavigationProperty Name="projeto" Relationship="agModel.projetoID" FromRole="ag" ToRole="projeto" />
-        </EntityType>
-        <Association Name="projetoID">
-          <End Type="agModel.projeto" Role="projeto" Multiplicity="0..1" />
-          <End Type="agModel.ag" Role="ag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="projeto">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ag">
-              <PropertyRef Name="projetoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="agModelStoreContainer" CdmEntityContainer="agEntities">
+          <EntitySetMapping Name="ags">
+            <EntityTypeMapping TypeName="agModel.ag">
+              <MappingFragment StoreEntitySet="ag">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="projetoID" ColumnName="projetoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projetoes">
+            <EntityTypeMapping TypeName="agModel.projeto">
+              <MappingFragment StoreEntitySet="projeto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="agModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
@@ -166,19 +271,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="projetoes">
-            <EntityTypeMapping TypeName="agModel.projeto">
-              <MappingFragment StoreEntitySet="projeto">
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ags">
-            <EntityTypeMapping TypeName="agModel.ag">
-              <MappingFragment StoreEntitySet="ag">
-                <ScalarProperty Name="projetoID" ColumnName="projetoID" />
-                <ScalarProperty Name="numero" ColumnName="numero" />
+          <EntitySetMapping Name="usuario_has_projeto">
+            <EntityTypeMapping TypeName="agModel.usuario_has_projeto">
+              <MappingFragment StoreEntitySet="usuario_has_projeto">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="projeto_id" ColumnName="projeto_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

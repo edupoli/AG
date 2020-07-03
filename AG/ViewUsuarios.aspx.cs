@@ -9,13 +9,21 @@ namespace AG
 {
     public partial class ViewUsuarios : System.Web.UI.Page
     {
-        int usuarioID;
+        string usuarioID;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session.Count.ToString();
+            string nnome = Session["nome"].ToString();
+            string teste = Session["perfil"].ToString();
             if (!Page.IsPostBack)
             {
-                usuarioID = Convert.ToInt32(Request.QueryString["usuarioID"]);
-                getUsuarios(usuarioID);
+                if (Session["perfil"].ToString() != "Administrador")
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                    Response.Redirect("login.aspx");
+                }
+                usuarioID = Request.QueryString["usuarioID"];
+                getUsuarios(int.Parse(usuarioID));
             }
         }
 
@@ -33,9 +41,9 @@ namespace AG
             senha.Text = user.senha;
             cboxPerfil.SelectedValue = user.perfil;
             cargo.Text = user.cargo;
-            projeto gr = ctx.projetoes.First(p => p.id == user.projetoID);
-            string gru = gr.nome;
-            cboxProjeto.Items.Insert(0, new ListItem(gru, "1"));
+           // projeto gr = ctx.projetoes.First(p => p.id == user.projetoID);
+            //string gru = gr.nome;
+            //cboxProjeto.Items.Insert(0, new ListItem(gru, "1"));
             imgSel.ImageUrl = "dist/img/users/" + user.img;
         }
     }

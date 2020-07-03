@@ -26,9 +26,9 @@
         <!-- SELECT2 EXAMPLE -->
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title"><i class="fa-project-diagram"></i></h3>
+            <h3 class="card-title"><i class="fas fa-project-diagram"></i></h3>
             <div class="card-tools">
-              <asp:Button Text="Editar" CssClass="btn btn-sm btn-info" runat="server" ID="btnEditar" OnClick="btnEditar_Click" />
+              <asp:Button Text="Salvar" CssClass="btn btn-sm btn-info" runat="server" ID="btnEditar" OnClick="btnEditar_Click" />
               <asp:Button Text="Voltar" CssClass="btn btn-sm btn-secondary" runat="server" ID="btnVoltar" OnClick="btnVoltar_Click"/>
               <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>

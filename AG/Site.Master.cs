@@ -37,7 +37,7 @@ namespace AG
 
         protected void linkUsuario_Click(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() != "Administrador")
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
@@ -50,7 +50,7 @@ namespace AG
 
         protected void linkGrupoUsuario_Click(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() != "Administrador")
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
@@ -63,7 +63,7 @@ namespace AG
 
         protected void cadastrarAG_Click(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() != "Administrador")
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
@@ -72,6 +72,42 @@ namespace AG
                 Response.Redirect("AddAG.aspx");
             }
                 
+        }
+
+        protected void linkConsltUser_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() == "Operador" )
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("Usuarios.aspx");
+            }
+        }
+
+        protected void linkConsulProjeto_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "Administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("Projetos.aspx");
+            }
+        }
+
+        protected void linkConsultAG_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "Administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("AGs.aspx");
+            }
         }
     }
 }

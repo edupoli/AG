@@ -16,15 +16,15 @@ namespace AG
         static string prevPage = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (!Page.IsPostBack)
             {
                 if (Session["logado"] == null)
                 {
                     Response.Redirect("login.aspx");
                 }
-                else 
-            if (Session["perfil"].ToString() != "administrador")
+                else
+            if (Session["perfil"].ToString() != "Administrador")
                 {
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
                     Response.Redirect("login.aspx");
@@ -58,7 +58,7 @@ namespace AG
                     user.login = login.Text.Trim();
                     user.senha = senhaCriptografada;
                     user.perfil = cboxPerfil.SelectedValue;
-                    user.projetoID = int.Parse(cboxProjeto.DataValueField);
+                    user.projetoID = int.Parse(cboxProjeto.SelectedValue);
                     user.img = lblCaminhoImg.Text.Trim();
                     user.cargo = cargo.Text.Trim();
                     ctx.usuarios.Add(user);
@@ -71,8 +71,9 @@ namespace AG
                     cboxPerfil.SelectedIndex = -1;
                     cboxProjeto.SelectedIndex = -1;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    mensagem = "Ocorreu o seguinte erro ao gravar :" + ex.Message;
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
                     throw;
                 }

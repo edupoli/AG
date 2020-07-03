@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v19.1.Core, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Core, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Export, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.Resources.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -123,8 +129,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="EditAG.aspx" />
+    <Content Include="EditAGsupervisor.aspx" />
     <Content Include="EditProjetos.aspx" />
     <Content Include="EditUsuarios.aspx" />
+    <Content Include="EditUsuariosSup.aspx" />
     <Content Include="home.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -137,26 +145,26 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="WebForm1.aspx" />
-    <EntityDeploy Include="ModelAG.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelAG.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="login.aspx" />
-    <Content Include="ModelAG.edmx.diagram">
-      <DependentUpon>ModelAG.edmx</DependentUpon>
-    </Content>
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="ModelAG.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelAG.Context.cs</LastGenOutput>
       <DependentUpon>ModelAG.edmx</DependentUpon>
+      <LastGenOutput>ModelAG.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ModelAG.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelAG.edmx</DependentUpon>
       <LastGenOutput>ModelAG.cs</LastGenOutput>
     </Content>
+    <Content Include="WebForm1.aspx" />
+    <Content Include="login.aspx" />
+    <EntityDeploy Include="ModelAG.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelAG.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModelAG.edmx.diagram">
+      <DependentUpon>ModelAG.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Projetos.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -240,6 +248,13 @@
     <Compile Include="EditAG.aspx.designer.cs">
       <DependentUpon>EditAG.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditAGsupervisor.aspx.cs">
+      <DependentUpon>EditAGsupervisor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditAGsupervisor.aspx.designer.cs">
+      <DependentUpon>EditAGsupervisor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EditProjetos.aspx.cs">
       <DependentUpon>EditProjetos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -253,6 +268,13 @@
     </Compile>
     <Compile Include="EditUsuarios.aspx.designer.cs">
       <DependentUpon>EditUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditUsuariosSup.aspx.cs">
+      <DependentUpon>EditUsuariosSup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditUsuariosSup.aspx.designer.cs">
+      <DependentUpon>EditUsuariosSup.aspx</DependentUpon>
     </Compile>
     <Compile Include="home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
@@ -321,6 +343,9 @@
     </Compile>
     <Compile Include="Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="usuario_has_projeto.cs">
+      <DependentUpon>ModelAG.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewAGs.aspx.cs">
       <DependentUpon>ViewAGs.aspx</DependentUpon>

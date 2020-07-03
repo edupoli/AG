@@ -17,7 +17,7 @@ namespace AG
                 Response.Redirect("login.aspx");
             }
             else
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() != "Administrador")
             {
                 ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
                 Response.Redirect("login.aspx");

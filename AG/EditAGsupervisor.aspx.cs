@@ -7,13 +7,13 @@ using System.Web.UI.WebControls;
 
 namespace AG
 {
-    public partial class EditProjetos : System.Web.UI.Page
+    public partial class EditAGsupervisor : System.Web.UI.Page
     {
-        string projetoID;
+        int agID;
         public string mensagem = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            projetoID = Request.QueryString["projetoID"];
+            agID = Convert.ToInt32(Request.QueryString["agID"]);
             if (!Page.IsPostBack)
             {
                 if (!Page.IsPostBack)
@@ -23,53 +23,63 @@ namespace AG
                         Response.Redirect("login.aspx");
                     }
                     else
-                if (Session["perfil"].ToString() != "Administrador")
+                if (Session["perfil"].ToString() == "Operador")
                     {
                         ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
                         Response.Redirect("login.aspx");
                     }
-                    getProjeto(int.Parse(projetoID));
+                    buscarAG(agID);
                 }
             }
         }
 
-        protected void btnEditar_Click(object sender, EventArgs e)
+        protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (nome.Text == "")
+            if (numeroAG.Text == "")
             {
-                mensagem = "Campo Nome é obrigatorio";
+                mensagem = "Campo Numero é obrigatorio";
                 ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
-                nome.Focus();
+                numeroAG.Focus();
             }
             else
             {
                 try
                 {
-                    int cod = int.Parse(projetoID);
                     agEntities ctx = new agEntities();
-                    projeto gu = ctx.projetoes.First(p => p.id == cod);
-                    gu.nome = nome.Text.Trim();
+                    ag gr = ctx.ags.First(g => g.id == agID);
+                    gr.numero = numeroAG.Text.Trim();
+                    gr.projetoID = Convert.ToInt32(cboxProjeto.SelectedValue);
                     ctx.SaveChanges();
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
                 }
                 catch (Exception)
                 {
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                    throw;
                 }
             }
+
+
 
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Projetos.aspx");
+            Response.Redirect("AGs.aspx");
         }
-        private void getProjeto(int cod)
+        private void buscarAG(int cod)
         {
-            agEntities ctx = new agEntities();
-            projeto gu = ctx.projetoes.First(p => p.id == cod);
-            nome.Text = gu.nome;
+            try
+            {
+                agEntities ctx = new agEntities();
+                ag gr = ctx.ags.First(g => g.id == cod);
+                numeroAG.Text = gr.numero.ToString();
+                cboxProjeto.SelectedValue = Convert.ToString(gr.projetoID);
+            }
+            catch (Exception ex)
+            {
+                mensagem = "Ocorreu o seguinte erro: " + ex.Message;
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+            }
         }
     }
 }

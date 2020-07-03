@@ -8,10 +8,10 @@ using System.Web.UI.WebControls;
 
 namespace AG
 {
-    public partial class EditUsuarios : System.Web.UI.Page
+    public partial class EditUsuariosSup : System.Web.UI.Page
     {
         string usuarioID;
-        public string mensagem;
+        public string mensagem = string.Empty;
         string image;
         string password = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
@@ -21,7 +21,7 @@ namespace AG
             {
                 if (Session["logado"] != null)
                 {
-                    if (Session["perfil"].ToString() != "Administrador")
+                    if (Session["perfil"].ToString() == "Operador")
                     {
                         Response.Redirect("login.aspx");
                     }

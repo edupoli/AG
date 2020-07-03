@@ -14,16 +14,23 @@ namespace AG
         {
             if (!Page.IsPostBack)
             {
-                GridView1.DataSource = GetProjetos();
-                GridView1.DataBind();
+                GetProjetos();
             }
         }
 
-        public List<projeto> GetProjetos()
+        private void GetProjetos()
         {
-            var ctx = new agEntities();
-            return ctx.projetoes.ToList();
+            agEntities ctx = new agEntities();
+            var resultado = (from a in ctx.projetoes
+                             orderby a.nome
+                             select new
+                             {
+                                 a.id,
+                                 a.nome,
 
+                             });
+            GridView1.DataSource = resultado.ToList();
+            GridView1.DataBind();
         }
 
         protected void btnVisualizar_Click(object sender, EventArgs e)
@@ -34,7 +41,7 @@ namespace AG
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() != "Administrador")
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
@@ -48,7 +55,7 @@ namespace AG
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (Session["perfil"].ToString() != "administrador")
+            if (Session["perfil"].ToString() != "Administrador")
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
@@ -62,8 +69,7 @@ namespace AG
                     ctx.projetoes.Remove(gu);
                     ctx.SaveChanges();
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-                    GridView1.DataSource = GetProjetos();
-                    GridView1.DataBind();
+                    GetProjetos();
                 }
                 catch (Exception)
                 {

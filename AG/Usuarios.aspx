@@ -131,6 +131,7 @@
             $('#<%= GridView1.ClientID%>').prepend($("<thead></thead>").append($("#<%= GridView1.ClientID%>").find("tr:first"))).DataTable({
                 "bJQueryUI": true,
                 "autoWidth": true,
+                "order": [[ 2, "asc" ]],
                  
                 "oLanguage": {
                     "sProcessing":   "Processando...",

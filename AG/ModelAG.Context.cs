@@ -25,8 +25,9 @@ namespace AG
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<usuario> usuarios { get; set; }
-        public DbSet<projeto> projetoes { get; set; }
         public DbSet<ag> ags { get; set; }
+        public DbSet<projeto> projetoes { get; set; }
+        public DbSet<usuario> usuarios { get; set; }
+        public DbSet<usuario_has_projeto> usuario_has_projeto { get; set; }
     }
 }

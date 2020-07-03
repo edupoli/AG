@@ -78,69 +78,16 @@
                 <div class="form-group">
                   <label>Perfil</label>
                     <asp:DropDownList runat="server" ID="cboxPerfil" CssClass="form-control" >
-                        <asp:ListItem Text="Operador"  Value="comum"/>
-                        <asp:ListItem Text="Administrador" Value="administrador" />
-                        <asp:ListItem Text="Supervisor" Value="supervisor" />
+                        <asp:ListItem Text="Operador"  Value="Operador"/>
+                        <asp:ListItem Text="Administrador" Value="Administrador" />
+                        <asp:ListItem Text="Supervisor" Value="Supervisor" />
                     </asp:DropDownList>
                 </div>
                 </div>
                   <div class="col">
                     <div class="form-group">
-                      <label>Multiple (.select2-purple)</label>
-                      <div class="select2-purple">
-                        <select class="select2" runat="server" ID="cboxProjeto" multiple="true" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;" >
-                          <option>Alabama</option>
-                          <option>Alaska</option>
-                          <option>California</option>
-                          <option>Delaware</option>
-                          <option>Tennessee</option>
-                          <option>Texas</option>
-                          <option>Washington</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- /.form-group -->
-                  </div>
-
-                  <div class="col">
-                    <div class="form-group">
                       <label>Projeto</label>
-                          
-                          <dx:ASPxDropDownEdit ClientInstanceName="checkComboBox" ID="ASPxDropDownEdit1" Width="285px" runat="server" AnimationType="None">
-                            <DropDownWindowStyle BackColor="#EDEDED" />
-                            <DropDownWindowTemplate>
-                                <dx:ASPxListBox Width="100%" ID="listBox" ClientInstanceName="checkListBox" SelectionMode="CheckColumn"
-                                    runat="server" Height="200" EnableSelectAll="true">
-                                    <FilteringSettings ShowSearchUI="true"/>
-                                    <Border BorderStyle="None" />
-                                    <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#DCDCDC" />
-                                    <Items>
-                                        <dx:ListEditItem Text="Chrome" Value="0" Selected="true"/>
-                                        <dx:ListEditItem Text="Firefox" Value="1" />
-                                        <dx:ListEditItem Text="IE" Value="2" />
-                                        <dx:ListEditItem Text="Opera" Value="3" />
-                                        <dx:ListEditItem Text="Safari" Value="4" Selected="true"/>
-                                    </Items>
-                                    <ClientSideEvents SelectedIndexChanged="updateText" Init="updateText" />
-                                </dx:ASPxListBox>
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="padding: 4px">
-                                            <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" style="float: right">
-                                                <ClientSideEvents Click="function(s, e){ checkComboBox.HideDropDown(); }" />
-                                            </dx:ASPxButton>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </DropDownWindowTemplate>
-                            <ClientSideEvents TextChanged="synchronizeListBoxValues" DropDown="synchronizeListBoxValues" />
-                        </dx:ASPxDropDownEdit>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                      <label>Projeto</label>
-                        <asp:DropDownList runat="server" ID="cboxProjeto1"  CssClass="form-control" DataSourceID="SqlDataSource1" DataTextField="nome" DataValueField="id" >
+                        <asp:DropDownList runat="server" ID="cboxProjeto"  CssClass="form-control" DataSourceID="SqlDataSource1" DataTextField="nome" DataValueField="id" >
                         </asp:DropDownList>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:agConnectionString %>" ProviderName="<%$ ConnectionStrings:agConnectionString.ProviderName %>" SelectCommand="SELECT id, nome FROM projeto"></asp:SqlDataSource>
                     </div>
@@ -255,36 +202,6 @@ function voltarPagina()
 }
 </script>
 
-    <script type="text/javascript">
-        var textSeparator = ";";
-        function updateText() {
-            var selectedItems = checkListBox.GetSelectedItems();
-            checkComboBox.SetText(getSelectedItemsText(selectedItems));
-        }
-        function synchronizeListBoxValues(dropDown, args) {
-            checkListBox.UnselectAll();
-            var texts = dropDown.GetText().split(textSeparator);
-            var values = getValuesByTexts(texts);
-            checkListBox.SelectValues(values);
-            updateText(); // for remove non-existing texts
-        }
-        function getSelectedItemsText(items) {
-            var texts = [];
-            for (var i = 0; i < items.length; i++)
-                    texts.push(items[i].text);
-            return texts.join(textSeparator);
-        }
-        function getValuesByTexts(texts) {
-            var actualValues = [];
-            var item;
-            for(var i = 0; i < texts.length; i++) {
-                item = checkListBox.FindItemByText(texts[i]);
-                if(item != null)
-                    actualValues.push(item.value);
-            }
-            return actualValues;
-        }
-    </script>
-
+    
 
 </asp:Content>

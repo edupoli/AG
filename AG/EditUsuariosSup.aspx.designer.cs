@@ -10,132 +10,132 @@
 namespace AG {
     
     
-    public partial class SiteMaster {
+    public partial class EditUsuariosSup {
         
         /// <summary>
-        /// Controle form1.
+        /// Controle btnSalvar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
         
         /// <summary>
-        /// Controle imgUser1.
+        /// Controle btnVoltar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgUser1;
+        protected global::System.Web.UI.WebControls.Button btnVoltar;
         
         /// <summary>
-        /// Controle lblNome.
+        /// Controle nome.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNome;
+        protected global::System.Web.UI.WebControls.TextBox nome;
         
         /// <summary>
-        /// Controle imgUser.
+        /// Controle email.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgUser;
+        protected global::System.Web.UI.WebControls.TextBox email;
         
         /// <summary>
-        /// Controle lblCargo.
+        /// Controle login.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCargo;
+        protected global::System.Web.UI.WebControls.TextBox login;
         
         /// <summary>
-        /// Controle btnProfile.
+        /// Controle senha.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnProfile;
+        protected global::System.Web.UI.WebControls.TextBox senha;
         
         /// <summary>
-        /// Controle btnLogout.
+        /// Controle cboxPerfil.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogout;
+        protected global::System.Web.UI.WebControls.DropDownList cboxPerfil;
         
         /// <summary>
-        /// Controle linkConsltUser.
+        /// Controle cboxProjeto.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkConsltUser;
+        protected global::System.Web.UI.WebControls.DropDownList cboxProjeto;
         
         /// <summary>
-        /// Controle linkUsuario.
+        /// Controle SqlDataSource1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkUsuario;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
         
         /// <summary>
-        /// Controle linkConsulProjeto.
+        /// Controle cargo.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkConsulProjeto;
+        protected global::System.Web.UI.WebControls.TextBox cargo;
         
         /// <summary>
-        /// Controle linkGrupoUsuario.
+        /// Controle lblCaminhoImg.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkGrupoUsuario;
+        protected global::System.Web.UI.WebControls.Label lblCaminhoImg;
         
         /// <summary>
-        /// Controle linkConsultAG.
+        /// Controle imgSel.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkConsultAG;
+        protected global::System.Web.UI.WebControls.Image imgSel;
         
         /// <summary>
-        /// Controle cadastrarAG.
+        /// Controle img.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton cadastrarAG;
+        protected global::System.Web.UI.WebControls.FileUpload img;
         
         /// <summary>
-        /// Controle body.
+        /// Controle btnUpload.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder body;
+        protected global::System.Web.UI.WebControls.Button btnUpload;
     }
 }

@@ -14,6 +14,11 @@ namespace AG
     
     public partial class usuario
     {
+        public usuario()
+        {
+            this.usuario_has_projeto = new HashSet<usuario_has_projeto>();
+        }
+    
         public int id { get; set; }
         public string nome { get; set; }
         public string emaill { get; set; }
@@ -22,8 +27,9 @@ namespace AG
         public string perfil { get; set; }
         public string img { get; set; }
         public string cargo { get; set; }
-        public int projetoID { get; set; }
+        public Nullable<int> projetoID { get; set; }
     
+        public virtual ICollection<usuario_has_projeto> usuario_has_projeto { get; set; }
         public virtual projeto projeto { get; set; }
     }
 }

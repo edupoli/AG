@@ -10,11 +10,17 @@ namespace AG
     public partial class ViewProjetos : System.Web.UI.Page
     {
         string projetoID;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             projetoID = Request.QueryString["projetoID"];
             if (!Page.IsPostBack)
             {
+                if (Session["perfil"].ToString() != "Administrador")
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                    Response.Redirect("login.aspx");
+                }
                 getProjetos(int.Parse(projetoID));
             }
         }

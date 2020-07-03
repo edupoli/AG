@@ -16,6 +16,11 @@ namespace AG
             agID = Request.QueryString["agID"];
             if (!Page.IsPostBack)
             {
+                if (Session["perfil"].ToString() != "Administrador")
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                        Response.Redirect("login.aspx");
+                    }
                 buscaAG(int.Parse(agID));
             }
         }

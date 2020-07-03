@@ -12,20 +12,13 @@ namespace AG
     using System;
     using System.Collections.Generic;
     
-    public partial class projeto
+    public partial class usuario_has_projeto
     {
-        public projeto()
-        {
-            this.ags = new HashSet<ag>();
-            this.usuario_has_projeto = new HashSet<usuario_has_projeto>();
-            this.usuarios = new HashSet<usuario>();
-        }
+        public int usuario_id { get; set; }
+        public int projeto_id { get; set; }
+        public Nullable<int> id { get; set; }
     
-        public int id { get; set; }
-        public string nome { get; set; }
-    
-        public virtual ICollection<ag> ags { get; set; }
-        public virtual ICollection<usuario_has_projeto> usuario_has_projeto { get; set; }
-        public virtual ICollection<usuario> usuarios { get; set; }
+        public virtual projeto projeto { get; set; }
+        public virtual usuario usuario { get; set; }
     }
 }
